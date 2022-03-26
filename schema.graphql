@@ -1,5 +1,6 @@
 schema {
     query: Query
+    mutation: Mutation
 }
 
 type Post {
@@ -15,13 +16,19 @@ type PostResult {
     post: Post
 }
 
-type PostsResult {
+type PostsResultList {
     success: Boolean!
     errors: [String]
-    post: [Post]
+    posts: [Post]
 }
 
 type Query {
-    listPosts: PostsResult!
+    listPosts: PostsResultList!
     getPost(id: ID!): PostResult!
+}
+
+type Mutation {
+    createPost(title: String!, description: String!, created_at: String): PostResult!
+    updatePost(id: ID!, title: String, description: String): PostResult!
+    deletePost(id: ID): PostResult!
 }
